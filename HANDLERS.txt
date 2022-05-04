@@ -1,0 +1,18 @@
+UTILIZING HANDLERS
+
+
+   1. handlers are tasks that execute only if the system configuration changes because of task
+   2. they only execute if a task notifies it for execution
+   3. handlers require a globally unique name for identification
+
+controlling handlers
+      
+   1. Handlers always run after a play has completed its tasks execution. 
+   2. this ensures  that handlers run only once even on multiple callings.
+
+FlUSH HANDLERS.
+
+   1. A flush handlers task allows users to execute handlers that have been notified before the play ends.
+
+        - name:  Flush  handlers
+          meta:  flush_handlers

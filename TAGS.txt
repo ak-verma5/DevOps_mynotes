@@ -1,0 +1,67 @@
+TAGS:
+   
+   1. tags allow users to structure and execute their playbooks according to their requirements.
+   2. it enables users to execute only specific parts of the playbooks.
+   3. tags can also be used to skip-over certain unwanted tasks.
+   4. tags could be added to individual tasks or at block, play, or even at role level. 
+
+SPECIAL TAGS:
+  
+ansible reserve special tags called always and never which have special behavior.
+   1. always: the task with always tags will always run unless (--skip-tags always) is used.
+   2. never: tasks with never tag will never will execute unless specifically requested (--tags never)
+==============================================================================================================================
+SELECTING OR SKIPPING TAGS FOR EXECUTION:
+
+--tags all               - tags are ignored, all the tasks execute.
+--tags "tag1, tag2"      - only tasks with tag1 and tag2 execute.
+--skip-tags "tag3, tag4" - only tasks with tag3 and tag4 are skipped.
+--tags tagged            - only tagged tsks execute.    
+--tags untagged          - only untagged tasks execute. 
+
+SYNTAX:
+
+ansible-playbook playbook.yml --tags tagged
+==============================================================================================================================
+ADDING TAGS TO TASKS:
+
+   1. one or more tags can be applied to individual tasks.
+   2. multiple tasks can be tagged with the same tag.
+
+- name: install ntp
+  apt:
+    pkg: ntp
+    state: present
+  tags:
+  - ntp
+===============================================================================================================================
+ADDING TAGS TO BLOCKS
+
+block:
+tags: setup
+- name: install ntp
+  apt:
+    pkg: ntp
+    state: present
+- name: install nginx
+  apt: 
+    pkg: nginx
+    state: present
+================================================================================================================================
+ADDING TAGS TO PLAYS
+
+    1. all the task in a play can tagged together at the play level.
+
+- hosts: all
+  tags: setup
+  tasks:
+  - name: install ntp
+    apt:
+     pkg: ntp
+     state: present
+  - name: install nginx
+     apt: 
+	  name: nginx
+      state: present
+===================================================================================================================================
+

@@ -1,0 +1,49 @@
+conditionals:-
+
+conditionals allows users to execute different tasks when a certain condition is met. 
+conditions can be based on:
+
+   1. a variable
+   2. result of a previous task
+   3. set fact value
+
+conditional statement:-  when
+   
+   1. ansible uses the when statement to define conditions
+   2. when the statement determines whether to execute the task at hand or not. 
+==============================================================================================================
+SYNTAX 
+
+
+- tasks:
+  - name:  ...
+    when:  [ condition ]
+
+
+===============================================================================================================
+
+Logical AND/OR Operations with when statement:-
+
+the when statement can be executed with logical AND/OR operators
+   1. AND requires all the conditions to be true
+   2. OR requires one of the conditions to be true
+================================================================================================================
+SYNTAX
+
+-   tasks: 
+    -  name:  ...
+       when:  [ condition1 ]  and  [ condition2 ]
+    -  name:  ...
+       when: [ condition3 ] or [ condition4 ]
+================================================================================================================
+-  tasks:
+   - name: install nginx server
+     apt:
+       pkg: nginx
+       state:  present
+     when: 
+       ansible_os_family == "Debian"
+================================================================================================================
+
+
+
