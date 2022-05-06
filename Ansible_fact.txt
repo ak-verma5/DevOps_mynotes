@@ -1,0 +1,54 @@
+ANSIBLE_FACT: 
+  
+  1. Ansible collect all the information about the remote hosts while running a playbook.
+  2. tasks of collecting this remote host information is called as Gathering Facts by ansible
+     and the details collected are generally known as facts or variables.
+  3. Facts are manually obtained by ansible ad-hoc command and a setup module.
+  4. In fact, ansible playbook call this setup module by default to perform gathering facts task.
+  
+  5. facts gathered from remote  hosts can be divided into three categories.
+       A. LIST: list of items or list of interface. information inside the list is enclosed in square brackets[]
+       B. Dictionay: collection of key pair vaule. information inside the  dictionary is enclosed in curly brackets {}
+       C. Ansible Unsafe Test: A variables, which holds value and there is no subpart. it can either be a part of dictionary or stand alone.
+
+===========================================================================================================================================================	   
+Setup Module:
+
+  1. setup module is used to gather ansible facts.
+  2. you can stop gathering facts by metioning gather_facts: no in the  playbook.
+  3. you can run setup module and register the output in a variables, and the whole set of information
+      will be on JSON format.
+ 
+ ansible <hostname>  -m setup  -i /etc/ansible/hosts
+ 
+==============================================================================================================================================================
+
+Using Ansible Facts in playbook: 
+
+  1. all the variables can be used in your playbook by calling them in jinja2 syntax.
+  2. these variables can be used in many cases/requirement like - 
+     
+	 A. condition based execution like when the remote hostname is "XYZ", or the remote server os is "redhat"
+	 B. when the mount point used percentage is greater than 80.
+	 C. when getting the remote box information like hostname, fqdn, mac_address, IP address etc.
+	 
+=============================================================================================================================================================
+Accessing Facts:
+
+  1. use the actual name without ansible keyword to access the variables from ansible facts in tthe ansible playbook.
+  
+     ansible_facts["system"]
+  2. fetch the ansible facts and display them using a playbook. 
+  
+- hosts: all
+  tasks:
+  - debug:
+       var: ansible_facts
+	   
+   3. fetching  the  ansible  facts, filtering them, and displaying them using a playbook. 
+   
+- hosts: all 
+  tasks:
+  - debug: 
+      var: ansible_facts["cmdline"]
+	 
