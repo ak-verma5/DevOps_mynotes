@@ -1,0 +1,74 @@
+Varaible:
+
+ 1. variables are ansible's way of dealing with differences between different systems and envirornments.
+ 2. they can be handle major/minor differences between systems with same configuration.
+ 3. users can also collect facts from other remote systems and store them in variables.
+ 4. variables can be defined and used anywhere in ansible: playbook, ad-hoc command, inventory
+=================================================================================================================================================
+
+Simple variables:
+
+#defining a simple variable
+  
+  region: asia
+
+# referencing a simple variable
+ 
+  server: "{{region}}"
+  
+====================================================================================================================================================
+
+List of Variables:
+
+# List variables can be defined in YAML list format or in '[]' brackets.
+ region:
+    - asia
+	- europe
+	- northamerica
+	- southamerica
+
+# OR 
+
+ region: ['asia', 'europe', 'northamerica', 'southamerica']
+ 
+# referencing a list of variable.
+
+   server: "{{region[2]}}"
+=====================================================================================================================================================
+
+Dictionay variable:
+
+# Defining variable as key:value dictionaries
+ 
+ sample:
+   arg1: yes
+   arg2: no
+
+# Referring key:value dictionary variables
+
+ sample['arg1']
+
+#OR
+ 
+ sample.arg2
+ 
+ 
+=====================================================================================================================================================
+
+Registering Varaibles:
+
+ 1. outputs from other tasks can be stored and uses as variable for other variable. the  process is known is registering variable.
+ 
+# Example
+
+- tasks:
+  - name: execute shell script
+    shell: somescript.sh
+	register: result
+	
+  - name: restart docker if result < 5
+    service: name=docker state=restarted
+	when: result.rc < 5
+	
+========================================================================================================================================================
+

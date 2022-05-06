@@ -1,0 +1,31 @@
+Ansible Vault? 
+  
+  1. Ansible automation require transfer of a lot of sensitive and private information.
+  2. this may include password, admin vairables, sensitive data files, etc.
+=============================================================================================================================================================
+Managing Vault password
+ 
+To develop a management strategy, two question need to be answered.
+  
+  1. whether to use a single  password for each encryption or to use multiple password.
+  2. where to store the created password?
+==============================================================================================================================================================
+Vault IDs
+
+single password vs multiple password setups basically depend upon who is using vault. 
+ 
+  1. Bigger teams should use multi-password setups.
+  2. smaller teams can work easily with single password setups.
+  
+vault IDs can be used to differentiate between multiple passwords.
+it simply adds a label to the  encrypted content.
+the  label documents what password was used to encrypt data.
+
+===============================================================================================================================================================
+
+Storing Vault password
+
+  vault  passwords can either be stored directly in a file or in a third party tool like 
+  secret manager. 
+  
+==============================================================================================================================================================

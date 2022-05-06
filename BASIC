@@ -17,4 +17,15 @@ Infrastructure as Code (IaC)
 1.	The imperative approach “gives order”. It defines a sequence of command or instruction so the infrastructure can reach the result. Ex. CHEF. 
 2.	A declarative approach, on the hand “declares” the desired outcome, instead of explicitly outlining the sequence of steps the infrastructure needs to reach
     the result, the declarative approach shows what the result looks like. Ex. Ansible.  
+	
+	
+Ansible:
+
+  1. ansible is a deployment automation tool which tradionally uses push approach to achieve its objective, by managing all the server through one
+     single machine running.
+  2. ansible client do not have any agent installed on them.
+  3. push approach: push approach does not require agent setup on  individual nodes like pull does.
+  4. pull works in a master slave architecture which requires agents setup on all slave nodes.
+  
+
 
