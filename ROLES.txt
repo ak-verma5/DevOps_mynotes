@@ -1,0 +1,101 @@
+ROLE:
+    
+	1. Roles provide a framework for completely independent or interdependent collection of variables, tasks, files, template, and module.
+	2. In ansible, role is the primary mechanism for breaking a playbook into multiple files.
+	3. breaking of playbook allows you to logically break the playbook into reusable components.
+	4. Hence, role simplifies writing complex playbook, and it makes them easier to reuse.
+===============================================================================================================================================
+Ansible-Galaxy:
+
+    1. ansible provides a feature called ansible galaxy that helps you to play with roles.
+	2. ansible galaxy is a role and collection manager for ansible.
+	3. you can compare it with node package manager (NPM) of Node.js.
+	4. ansible galaxy hosts ansible roles and collection created by the community.
+	5. instead of rewriting all role and collection from scratch, you can directly install it using the ansible galaxy command-line tool and 
+	   use them on your playbook. 
+	6. you can also write your own roles and collection and upload them to ansible galaxy.
+	7. Roles play an important role  in sharing code with other users within the ansible community using galaxy platform.
+	8. in ansible galaxy, thousands of roles performing different tasks like installing web server and database, monitoring tools and more.
+	9. ansible galaxy is a database or a repository of ansible roles that helps to streamline your playbooks and tasks. 
+
+commands 
+  
+    1. ansible-galaxy search <role>
+	2. ansible-galaxy search mysql
+	3. ansible-galaxy init <role_name>
+=================================================================================================================================================
+Directory Structure of Role:
+
+    1. default, files, handlers, meta, tasks, templates and vars are the directory in the roles.
+	2. Roles should include a minimum of one among these directory.
+	3. each directory must contain at-least one main.yml file, which contains the relevant content.
+
+DEFAULT:
+  
+    1. This directory contains data about the role which are ideally the default variables for the role.
+
+FILES:
+ 
+    1. this directory contains regular files which is deployed by the  role.
+	2. any script to be run on the  target host, or other files to be transfered to the remote host should be placed in this directory.
+
+HANDLERS:	
+
+    1. this directory contains handlers employed by this role.
+    2. handlers are tasks that are based on some action or trigger.
+
+META:
+  
+    1. this directory contains files that establish role dependencies.
+    2. also comprises information about role and its author such as author's name, company, licence details etc. 
+	
+TEMPLATES:
+
+    1. in this directory, you can place all the dynamic files/templeates that use variables which can be substituted during the 
+	   execution of the roles.
+	   
+TASKS:
+ 
+    1. contains all the tasks to be executed by the role that would usually be in a playbook.
+	
+VARIABLES:
+
+    1. Variables for the roles are  specified in this directory.
+	2. any default variables defined within the  default  directory are overwritten by the same variables defined in this folder.
+=========================================================================================================================================
+Benifits of ROLE:
+
+ 1. greatest advantages of using roles is that each node is independent of the other.
+ 2. execution of any role does not depend on the execution of another role.
+ 3. another advantage is that roles can be modified and reused.
+ 4. thus, eliminates the need for rewritting the plays and tasks in the  playbook file. 
+========================================================================================================================================
+USING ROLES:
+
+ 1. play level with roles option
+ 2. tasks level with include_role - using inclue_role, you can reuse roles dynamically anywhere in the task section of a play.
+ 3. tasks level with import_role - using import_role, you can reuse roles statically anywhere in the taks section of a play. 
+ 
+ 
+
+play level with roles option:
+ 
+ 1. if you use role option at the play level, ansible treats the roles as static import and processes them during playbook parsing.
+ 2. ansible executes your playbook in following order
+ 
+    A. any pre_tasks defined in the  play
+	B. any handlers triggered by pre_tasks
+	C. Every role listed in roles.
+	D. any tasks defined in the  play.
+	E. any handlers triggered by the  roles or tasks.
+	F. any post_tasks defined in the  play.
+	G. any handlers triggered by port_tasks.
+	
+#Example
+
+- hosts: webserver
+  roles:
+    - common
+	- webserver
+===========================================================================================================================================
+	

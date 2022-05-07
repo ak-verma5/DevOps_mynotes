@@ -27,5 +27,64 @@ Ansible:
   3. push approach: push approach does not require agent setup on  individual nodes like pull does.
   4. pull works in a master slave architecture which requires agents setup on all slave nodes.
   
+  
+Feature of ansible:
+  
+  1. simple: Ansible uses YAML (Yet Another Mark up Language) which is very simple and readable. No special coding skills are required to write in YAML.
+  2. Accessible: if someone automates something in ansible, everyone on the  team now knows how it is done.
+  3. Agentless: ansible uses openSSH and WinRM as transport to achieve sutomation. it is completely agentless. therefor making it a more efficient and 
+     secure option. 
+  4. Powerful: ansible can be used to manage entire infrastructure of an application. it can orchestrate the entire application and environment lifecycle
+     no matter where it is deployed.
+	 
+Ansible Components:
+
+  1. control node
+  2. managed node
+  3. inventory
+  4. CMDB
+  5. plugins 
+  6. playbook
+  7. module
+  8. API
+
+Control and Managed Nodes:
+  
+  1. Managed Node- any machine that is managed with ansible.
+  2. control Node- any machine in which ansible is installed to manage other nodes.
+  
+Inventory:
+ 
+  1. Ansible uses the inventory file to represent all the  machine it is managing.
+  2. users can then group the machine to their own liking.
+  3. common inventory file formats are INI and YAML.
+  4. default location of inventory file at /etc/ansible/hosts.
+  5. dynamic inventory is a script written in python, PHP or any other programming language.
+  6. it comes in handy with cloud platforms such as AWS, wheter IP addresses change when the virtual server is 
+     shutdown and restarted.
+	 
+
+Tasks:
+ 
+  1. unit of action and are also executable with ad hoc command.
+  2. by default, ansible executes tasks sequentially on at a time.
+
+CMDB:
+
+  1. The configuration management database keeps a record of all the configuration changes made in the system.
+  2. this database could be kept on the  cloud platform or on the physical server as well.
+
+Ansible Facts:
+
+  1. certain variables contain information about remote system or about ansible itself. these variables that 
+      related to remote systems are called facts.
+  2. this information can be about OS, IP address, filesystem, etc.
+  3. Helps in understanding the behavior or state of one system and can be used to configure other systems.
+  
+- name: print all available facts  
+  debug:
+    vars: ansible_facts
+	
+ansible <hostname> -m setup
 
 
